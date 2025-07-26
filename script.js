@@ -41,7 +41,7 @@ document.querySelector('.check').addEventListener('click', function () {
 
     // When player wins
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'Correct Number';
+    displayMessage('Correct number');
 
     // Changing the color
     document.querySelector('body').style.backgroundColor = '#60b347';
@@ -54,25 +54,13 @@ document.querySelector('.check').addEventListener('click', function () {
       highscore = score;
       document.querySelector('.highscore').textContent = highscore;
     }
-
-    // When guess is to high
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 0) {
-      document.querySelector('.message').textContent = 'Too High';
+      displayMessage(guess > secretNumber ? 'Too High' : 'Too Low');
       score--;
       document.querySelector('.score').textContent = score;
     } else if (score === 0) {
-      document.querySelector('.message').textContent = 'You lost the game';
-    }
-
-    //When guess is too low
-  } else if (guess < secretNumber) {
-    if (score > 0) {
-      document.querySelector('.message').textContent = 'Too Low';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else if (score === 0) {
-      document.querySelector('.message').textContent = 'You lost the game';
+      displayMessage('You lost the game');
     }
   }
 });
@@ -83,11 +71,9 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('.score').textContent = score;
   document.querySelector('.number').textContent = '?';
+  displayMessage('Start guessing');
   document.querySelector('.guess').value = '';
 
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
-
-  if (guess === secretNumber) {
-  }
 });
